@@ -14,10 +14,12 @@ return [0, 1].
 '''
 
 def two_sum(nums, target):
-    for i in range(len(nums) - 1):
-        for j in range(i + 1, len(nums)):
-            if nums[i] + nums[j] == target:
-                return [i, j]
+    dictionary = {num: index for index, num in enumerate(nums)}
+    for index, num in enumerate(nums):
+        if target - num in dictionary:
+            second = dictionary[target - num]
+            if not index == second:
+                return [index, second]
 
 def testcases():
     print(two_sum(nums = [2, 7, 11, 15], target = 9))
