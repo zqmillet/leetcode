@@ -16,10 +16,9 @@ return [0, 1].
 def two_sum(nums, target):
     dictionary = {num: index for index, num in enumerate(nums)}
     for index, num in enumerate(nums):
-        if target - num in dictionary:
-            second = dictionary[target - num]
-            if not index == second:
-                return [index, second]
+        second = dictionary.get(target - num, None)
+        if not second is None and not index == second:
+            return [index, second]
 
 def testcases():
     print(two_sum(nums = [2, 7, 11, 15], target = 9))
