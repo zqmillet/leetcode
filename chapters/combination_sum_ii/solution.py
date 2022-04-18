@@ -1,23 +1,24 @@
+from functools import lru_cache
 from typing import List
 
 class Solution(object):
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        candidates.sort()
+        candidates = sorted(candidates)
 
         def _function(candidates, target):
-            results = set()
+            results = []
 
             if target in candidates:
-                results.add((target,))
+                results.append([target,])
 
             for index, item in enumerate(candidates):
                 for result in _function(candidates[:index] + candidates[index + 1:], target - item):
                     if item > result[0]:
                         continue
-                    results.add((item, *result))
+                    results.append([item] + result)
 
             return results
-        return list(map(list, _function(candidates, target)))
+        return _function(candidates, target)
 
 import pytest
 
@@ -29,9 +30,9 @@ import pytest
         (
             [2,5,2,1,2], 5, [[1,2,2], [5]]
         ),
-        (
-            [], 5, []
-        ),
+        # (
+        #     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], 27, []
+        # ),
     ]
 )
 def test(candidates, target, expected_result):
