@@ -9,6 +9,11 @@ class Solution:
 
         min_distance = inf
         result = None
+        for i in range(len(nums)):
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+
         for x, y in combinations(nums, 2):
             delta = target - x - y
 
@@ -33,8 +38,8 @@ import pytest
 @pytest.mark.parametrize(
     'nums, target, expected_result', [
         ([-1,2,1,-4], 1, 2),
-        # ([0,0,0], 1, 0),
-        # ([1, 1, -1], 2, 1),
+        ([0,0,0], 1, 0),
+        ([1, 1, -1], 2, 1),
     ]
 )
 def test(nums, target, expected_result):
